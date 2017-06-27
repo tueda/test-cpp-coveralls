@@ -1,0 +1,6 @@
+*.o
+*.exe
+.deps/
+*.gcda
+*.gcno
+src/test1

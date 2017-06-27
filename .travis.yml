@@ -1,0 +1,27 @@
+language: c
+
+os:
+  - linux
+  - osx
+
+install:
+  - |
+    if [ $TRAVIS_OS_NAME = linux ]; then
+      pip install --user cpp-coveralls
+    fi
+    if [ $TRAVIS_OS_NAME = osx ]; then
+      brew update
+      eval "$(pyenv init -)"
+      pyenv install 2.7.6
+      pyenv global 2.7.6
+      pyenv rehash
+      pip install cpp-coveralls
+      pyenv rehash
+    fi
+
+script:
+  - make
+  - ./src/test1
+
+after_success:
+  - coveralls --gcov-options '\-lp'
